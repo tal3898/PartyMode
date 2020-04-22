@@ -8,6 +8,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,8 +24,26 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        var colorsList = Arrays.asList(
+            Color.RED,
+            Color.BLUE,
+            Color.GREEN,
+            Color.YELLOW,
+            Color.MAGENTA
+        )
 
         val currentLayout = findViewById(R.id.main_layout) as ConstraintLayout
-        currentLayout.setBackgroundColor(Color.RED)
+
+
+        var changeColorThread = Thread(Runnable {
+            while(true) {
+                var randomColorIndex = Random().nextInt(colorsList.size)
+                currentLayout.setBackgroundColor(colorsList[randomColorIndex])
+                Thread.sleep(3000)
+            }
+        })
+        changeColorThread.start()
+
+
     }
 }
