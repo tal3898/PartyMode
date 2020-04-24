@@ -12,6 +12,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    val COLOR_INTERVAL = 150L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             while(true) {
                 var randomColorIndex = Random().nextInt(colorsList.size)
                 currentLayout.setBackgroundColor(colorsList[randomColorIndex])
-                Thread.sleep(3000)
+                Thread.sleep(COLOR_INTERVAL)
             }
         })
         changeColorThread.start()
