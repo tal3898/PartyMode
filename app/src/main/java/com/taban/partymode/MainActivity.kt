@@ -13,11 +13,36 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     val COLOR_INTERVAL = 150L
+    val colorsList = Arrays.asList(
+        Color.RED,
+        Color.BLUE,
+        Color.GREEN,
+        Color.YELLOW,
+        Color.MAGENTA
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        hideAllScreenBars()
+        setContentView(R.layout.activity_main)
+        changeScreenColorRandomly()
+    }
 
+    fun changeScreenColorRandomly() {
+        val currentLayout = findViewById(R.id.main_layout) as ConstraintLayout
+
+        var changeColorThread = Thread(Runnable {
+            while(true) {
+                var randomColorIndex = Random().nextInt(colorsList.size)
+                currentLayout.setBackgroundColor(colorsList[randomColorIndex])
+                Thread.sleep(COLOR_INTERVAL)
+            }
+        })
+        changeColorThread.start()
+    }
+
+    fun hideAllScreenBars() {
         window.decorView.apply {
             // Hide both the navigation bar and the status bar.
             // SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
@@ -31,30 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
-        setContentView(R.layout.activity_main)
-
-        var colorsList = Arrays.asList(
-            Color.RED,
-            Color.BLUE,
-            Color.GREEN,
-            Color.YELLOW,
-            Color.MAGENTA
-        )
-
-        val currentLayout = findViewById(R.id.main_layout) as ConstraintLayout
-
-
-        var changeColorThread = Thread(Runnable {
-            while(true) {
-                var randomColorIndex = Random().nextInt(colorsList.size)
-                currentLayout.setBackgroundColor(colorsList[randomColorIndex])
-                Thread.sleep(COLOR_INTERVAL)
-            }
-        })
-        changeColorThread.start()
-
 
     }
 }
