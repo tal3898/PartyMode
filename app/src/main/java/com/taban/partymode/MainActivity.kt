@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
     val COLOR_INTERVAL = 150L
     val colorsList = Arrays.asList(
         Color.RED,
-        Color.RED,
-        Color.RED,
-        Color.RED,
-        Color.RED
+        Color.BLUE,
+        Color.GREEN,
+        Color.YELLOW,
+        Color.MAGENTA
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
