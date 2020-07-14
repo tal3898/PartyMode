@@ -8,6 +8,11 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,18 +20,27 @@ class MainActivity : AppCompatActivity() {
     val COLOR_INTERVAL = 150L
     val colorsList = Arrays.asList(
         Color.RED,
-        Color.BLUE,
-        Color.GREEN,
-        Color.YELLOW,
-        Color.MAGENTA
+        Color.RED,
+        Color.RED,
+        Color.RED,
+        Color.RED
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        MobileAds.initialize(this) {}
         hideAllScreenBars()
         setContentView(R.layout.activity_main)
+
+        val mAdView = adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+
         changeScreenColorRandomly()
+
+
     }
 
     fun changeScreenColorRandomly() {
